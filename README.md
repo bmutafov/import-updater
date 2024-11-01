@@ -26,7 +26,7 @@ Edit `migrator/index.ts`
 // run(
 //   "getCustomerCountryOfResidence",
 //   "getCustomerCountryOfResidence",
-//   "@trading212/onboarding.public.ts.util.customer",
+//   "@lib/customer",
 //   false
 // );
 ```
@@ -45,31 +45,31 @@ node <path_to_this_lib>/dist/index.js
 ### Example output for migrating:
 
 ```
- node /Users/boris.mutafov/tools/dist/migrator/index.js
+ node /tools/dist/migrator/index.js
 
 🚀 Starting migration 🚀
 Renaming getCustomerCountryOfResidence to getCustomerCountryOfResidence
-Changing imports to module specifier: @trading212/onboarding.public.ts.util.customer
+Changing imports to module specifier: @lib/customer
 
 ⛳️ Checkpoint: Begin
 Loading project files...
 ✔️ Project files loaded. Found 4543 files.
 ⛳️ Checkpoint: remove definition
 Iterating project files...
-Deleted function 'getCustomerCountryOfResidence' and its JSDoc comment from file: /Users/boris.mutafov/monorepo/apps/shared/react/trading-212-app/js/selectors/customer.ts
+Deleted function 'getCustomerCountryOfResidence' and its JSDoc comment from file: /js/selectors/customer.ts
 No such occurrences found in the project files. No updates made
 ⛳️ Checkpoint: getStateReplacer
 Iterating project files...
-/Users/boris.mutafov/monorepo/apps/shared/react/trading-212-app/js/components/InviteAFriendContactsScreen.tsx
+/js/components/InviteAFriendContactsScreen.tsx
 - getCustomerCountryOfResidence(state)
 + getCustomerCountryOfResidence()
-/Users/boris.mutafov/monorepo/apps/shared/react/trading-212-app/js/endpoints/useGetEligibleTradingTypesEndpoint.ts
+/js/endpoints/useGetEligibleTradingTypesEndpoint.ts
 - getCustomerCountryOfResidence(state)
 + getCustomerCountryOfResidence()
-/Users/boris.mutafov/monorepo/apps/shared/react/trading-212-app/js/endpoints/useGetTradingTypesTagsEndpoint.ts
+/js/endpoints/useGetTradingTypesTagsEndpoint.ts
 - getCustomerCountryOfResidence(state)
 + getCustomerCountryOfResidence()
-/Users/boris.mutafov/monorepo/apps/shared/react/trading-212-app/js/endpoints/useSetPersonalDetails.ts
+/js/endpoints/useSetPersonalDetails.ts
 - getCustomerCountryOfResidence(
         store.getState()
       )
@@ -77,76 +77,76 @@ Iterating project files...
 )
 Saving project...
 Project saved...
-/Users/boris.mutafov/monorepo/apps/shared/react/trading-212-app/js/components/InviteAFriendContactsScreen.tsx
+/js/components/InviteAFriendContactsScreen.tsx
 - import { getCustomerCountryOfResidence } from '../selectors/customer'
 Declaration remained empty, removing...
-+import { getCustomerCountryOfResidence } from "@trading212/onboarding.public.ts.util.customer";
-/Users/boris.mutafov/monorepo/apps/shared/react/trading-212-app/js/endpoints/useGetEligibleTradingTypesEndpoint.ts
++import { getCustomerCountryOfResidence } from "@lib/customer";
+/js/endpoints/useGetEligibleTradingTypesEndpoint.ts
 - import { getCustomerCountryOfResidence } from '../selectors/customer'
 Declaration remained empty, removing...
-+import { getCustomerCountryOfResidence } from "@trading212/onboarding.public.ts.util.customer";
-/Users/boris.mutafov/monorepo/apps/shared/react/trading-212-app/js/endpoints/useGetTradingTypesTagsEndpoint.ts
++import { getCustomerCountryOfResidence } from "@lib/customer";
+/js/endpoints/useGetTradingTypesTagsEndpoint.ts
 - import { getCustomerCountryOfResidence } from '../selectors/customer'
 Declaration remained empty, removing...
-+import { getCustomerCountryOfResidence } from "@trading212/onboarding.public.ts.util.customer";
-/Users/boris.mutafov/monorepo/apps/shared/react/trading-212-app/js/endpoints/useSetPersonalDetails.ts
++import { getCustomerCountryOfResidence } from "@lib/customer";
+/js/endpoints/useSetPersonalDetails.ts
 - import { getCustomerCountryOfResidence } from '../selectors/customer'
 Declaration remained empty, removing...
-+import { getCustomerCountryOfResidence } from "@trading212/onboarding.public.ts.util.customer";
++import { getCustomerCountryOfResidence } from "@lib/customer";
 Saving project...
 Project saved...
 ⛳️ Checkpoint: reduxReplacer
 Iterating project files...
-/Users/boris.mutafov/monorepo/apps/shared/react/trading-212-app/js/hooks/useTagsByTradingType.ts
+/js/hooks/useTagsByTradingType.ts
 - useReduxState(getCustomerCountryOfResidence)
 + useCustomerCountryOfResidence()
 Saving project...
 Project saved...
-/Users/boris.mutafov/monorepo/apps/shared/react/trading-212-app/js/hooks/useTagsByTradingType.ts
+/js/hooks/useTagsByTradingType.ts
 - import { getCustomerCountryOfResidence } from '../selectors/customer'
 Declaration remained empty, removing...
-+import { useCustomerCountryOfResidence } from "@trading212/onboarding.public.ts.util.customer";
++import { useCustomerCountryOfResidence } from "@lib/customer";
 Saving project...
 Project saved...
 ⛳️ Checkpoint: yieldSelectReplacer
 Iterating project files...
-/Users/boris.mutafov/monorepo/apps/shared/react/trading-212-app/js/flows/account-setup.ts
+/js/flows/account-setup.ts
 - select(getCustomerCountryOfResidence)
 + getCustomerCountryOfResidence()
-/Users/boris.mutafov/monorepo/apps/shared/react/trading-212-app/js/utils/consents.ts
+/js/utils/consents.ts
 - select(getCustomerCountryOfResidence)
 + getCustomerCountryOfResidence()
-/Users/boris.mutafov/monorepo/apps/shared/react/trading-212-app/js/utils/contacts.ts
+/js/utils/contacts.ts
 - select(getCustomerCountryOfResidence)
 + getCustomerCountryOfResidence()
-/Users/boris.mutafov/monorepo/apps/shared/react/trading-212-app/js/utils/customer.ts
+/js/utils/customer.ts
 - select(getCustomerCountryOfResidence)
 + getCustomerCountryOfResidence()
-/Users/boris.mutafov/monorepo/apps/shared/react/trading-212-app/js/utils/customer.ts
+/js/utils/customer.ts
 - select(getCustomerCountryOfResidence)
 + getCustomerCountryOfResidence()
-/Users/boris.mutafov/monorepo/apps/shared/react/trading-212-app/js/utils/signup.ts
+/js/utils/signup.ts
 - select(getCustomerCountryOfResidence)
 + getCustomerCountryOfResidence()
 Saving project...
 Project saved...
-/Users/boris.mutafov/monorepo/apps/shared/react/trading-212-app/js/flows/account-setup.ts
+/js/flows/account-setup.ts
 - import {
   getAccountProgressStepAfter,
   getCustomerCountryOfResidence,
   getIsCurrentAccountEligibleForChooseHowToInvest,
   getOnboardingDealer
 } from '../selectors/customer'
-+import { getCustomerCountryOfResidence } from "@trading212/onboarding.public.ts.util.customer";
-/Users/boris.mutafov/monorepo/apps/shared/react/trading-212-app/js/utils/consents.ts
++import { getCustomerCountryOfResidence } from "@lib/customer";
+/js/utils/consents.ts
 - import { getCustomerCountryOfResidence } from '../selectors/customer'
 Declaration remained empty, removing...
-+import { getCustomerCountryOfResidence } from "@trading212/onboarding.public.ts.util.customer";
-/Users/boris.mutafov/monorepo/apps/shared/react/trading-212-app/js/utils/contacts.ts
++import { getCustomerCountryOfResidence } from "@lib/customer";
+/js/utils/contacts.ts
 - import { getCustomerCountryOfResidence } from '../selectors/customer'
 Declaration remained empty, removing...
-+import { getCustomerCountryOfResidence } from "@trading212/onboarding.public.ts.util.customer";
-/Users/boris.mutafov/monorepo/apps/shared/react/trading-212-app/js/utils/customer.ts
++import { getCustomerCountryOfResidence } from "@lib/customer";
+/js/utils/customer.ts
 - import {
   getCanDeposit,
   getCurrentAccountProgressStep,
@@ -155,14 +155,14 @@ Declaration remained empty, removing...
   getIsReadyToTradeWithActivationStatusCheck,
   getSwitchAccountConfigFromPushNotification
 } from '../selectors/customer'
-+import { getCustomerCountryOfResidence } from "@trading212/onboarding.public.ts.util.customer";
-/Users/boris.mutafov/monorepo/apps/shared/react/trading-212-app/js/utils/customer.ts
-Correct import in /Users/boris.mutafov/monorepo/apps/shared/react/trading-212-app/js/utils/customer.ts
-+import { getCustomerCountryOfResidence } from "@trading212/onboarding.public.ts.util.customer";
-/Users/boris.mutafov/monorepo/apps/shared/react/trading-212-app/js/utils/signup.ts
++import { getCustomerCountryOfResidence } from "@lib/customer";
+/js/utils/customer.ts
+Correct import in /js/utils/customer.ts
++import { getCustomerCountryOfResidence } from "@lib/customer";
+/js/utils/signup.ts
 - import { getCustomerCountryOfResidence } from '../selectors/customer'
 Declaration remained empty, removing...
-+import { getCustomerCountryOfResidence } from "@trading212/onboarding.public.ts.util.customer";
++import { getCustomerCountryOfResidence } from "@lib/customer";
 Saving project...
 Project saved...
 ⛳️ Checkpoint: replace occurrences where is function argument...
@@ -171,16 +171,16 @@ No such occurrences found in the project files. No updates made
 Saving project...
 Project saved...
 ⛳️ Checkpoint: formatting files...
-apps/shared/react/trading-212-app/js/components/InviteAFriendContactsScreen.tsx
-apps/shared/react/trading-212-app/js/endpoints/useGetEligibleTradingTypesEndpoint.ts
-apps/shared/react/trading-212-app/js/endpoints/useGetTradingTypesTagsEndpoint.ts
-apps/shared/react/trading-212-app/js/endpoints/useSetPersonalDetails.ts
-apps/shared/react/trading-212-app/js/hooks/useTagsByTradingType.ts
-apps/shared/react/trading-212-app/js/flows/account-setup.ts
-apps/shared/react/trading-212-app/js/utils/consents.ts
-apps/shared/react/trading-212-app/js/utils/contacts.ts
-apps/shared/react/trading-212-app/js/utils/customer.ts
-apps/shared/react/trading-212-app/js/utils/signup.ts
+/js/components/InviteAFriendContactsScreen.tsx
+/js/endpoints/useGetEligibleTradingTypesEndpoint.ts
+/js/endpoints/useGetTradingTypesTagsEndpoint.ts
+/js/endpoints/useSetPersonalDetails.ts
+/js/hooks/useTagsByTradingType.ts
+/js/flows/account-setup.ts
+/js/utils/consents.ts
+/js/utils/contacts.ts
+/js/utils/customer.ts
+/js/utils/signup.ts
 ⛳️ Checkpoint: Check TS
 This takes a while...
 
@@ -191,12 +191,12 @@ This takes a while...
  ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 
-> nx run trading-212-app:build-ts
+> nx run app:build-ts
 
 
  ————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
- >  NX   Successfully ran target build-ts for project trading-212-app and 123 task(s) it depends on (26s)
+ >  NX   Successfully ran target build-ts for project app and 123 task(s) it depends on (26s)
 
    Nx read the output from the cache instead of running the command for 123 out of 124 tasks.
 
@@ -206,17 +206,17 @@ TS Check succeeded.
 ⛳️ Checkpoint: Committing changes...
 
  Changed the following files:
- M apps/shared/react/trading-212-app/js/components/InviteAFriendContactsScreen.tsx
- M apps/shared/react/trading-212-app/js/endpoints/useGetEligibleTradingTypesEndpoint.ts
- M apps/shared/react/trading-212-app/js/endpoints/useGetTradingTypesTagsEndpoint.ts
- M apps/shared/react/trading-212-app/js/endpoints/useSetPersonalDetails.ts
- M apps/shared/react/trading-212-app/js/flows/account-setup.ts
- M apps/shared/react/trading-212-app/js/hooks/useTagsByTradingType.ts
- M apps/shared/react/trading-212-app/js/selectors/customer.ts
- M apps/shared/react/trading-212-app/js/utils/consents.ts
- M apps/shared/react/trading-212-app/js/utils/contacts.ts
- M apps/shared/react/trading-212-app/js/utils/customer.ts
- M apps/shared/react/trading-212-app/js/utils/signup.ts
+ M /js/components/InviteAFriendContactsScreen.tsx
+ M /js/endpoints/useGetEligibleTradingTypesEndpoint.ts
+ M /js/endpoints/useGetTradingTypesTagsEndpoint.ts
+ M /js/endpoints/useSetPersonalDetails.ts
+ M /js/flows/account-setup.ts
+ M /js/hooks/useTagsByTradingType.ts
+ M /js/selectors/customer.ts
+ M /js/utils/consents.ts
+ M /js/utils/contacts.ts
+ M /js/utils/customer.ts
+ M /js/utils/signup.ts
 [STARTED] Preparing lint-staged...
 [SUCCESS] Preparing lint-staged...
 [STARTED] Running tasks for staged files...
