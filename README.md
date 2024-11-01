@@ -2,10 +2,10 @@
 
 Automatically migrate state in t212
 
-`yield select(selector)` to `getSelector()`
-`useReduxState(selector)` to `useSelector()`
-`getSelector(store.getState())` to `getSelector()`
-`selector` references to `getSelector` references
+- `yield select(selector)` to `getSelector()`
+- `useReduxState(selector)` to `useSelector()`
+- `getSelector(store.getState())` to `getSelector()`
+- `selector` references to `getSelector` references
 
 Formats the code on finish, check TS build for errors and if clean TS build make a commit with the changes.
 
@@ -35,13 +35,15 @@ Edit `migrator/index.ts`
 $ npm run build
 ```
 
+```
 cd <path_to_your_monorepo>
 node <path_to_this_lib>/dist/index.js
 
 ```
 
 
-Example output for migrating:
+### Example output for migrating:
+
 ```
  node /Users/boris.mutafov/tools/dist/migrator/index.js
 
