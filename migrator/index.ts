@@ -11,14 +11,25 @@ import {
   describeChanges,
   functionArgumentReplacer,
   saveProject,
+  getCommitMessage,
+  createSelectAccessors,
+  updateConnectors,
 } from "./utils";
+import pc from "picocolors";
 
-function run(
-  namedImportName: string,
-  renamedImportName: string,
-  moduleSpecifier: string,
-  isTransaction: boolean = false
-) {
+function run(params: {
+  namedImportName: string;
+  renamedImportName: string;
+  moduleSpecifier: string;
+  isTransaction?: boolean;
+}) {
+  const {
+    namedImportName,
+    renamedImportName,
+    moduleSpecifier,
+    isTransaction = false,
+  } = params;
+
   console.log("");
   console.log("🚀 Starting migration 🚀");
   console.log(`Renaming ${namedImportName} to ${renamedImportName}`);
@@ -32,6 +43,9 @@ function run(
 
   console.log("⛳️ Checkpoint: Begin");
   loadProject();
+
+  // console.log("⛳️ Checkpoint: Extend selector");
+  // createSelectAccessors(namedImportName.replace('get', 'select'));
 
   console.log("⛳️ Checkpoint: remove definition");
   findAndDeleteDefinition(namedImportName);
@@ -49,7 +63,7 @@ function run(
     isTransaction,
   });
 
-  console.log("⛳️ Checkpoint: reduxReplacer");
+  console.log("⛳️ Checkpoint: useReduxState/useSelector replacer");
   const reduxReplacedInFiles = reduxReplacer(
     namedImportName,
     renamedImportName
@@ -59,6 +73,17 @@ function run(
     renamedImportName,
     moduleSpecifier,
     sourceFiles: reduxReplacedInFiles,
+    shouldRenameToHook: true,
+    isTransaction,
+  });
+
+  console.log("⛳️ Checkpoint: useOnceFromReduxState replacer");
+  const replacedInOnceHooks = reduxReplacer(namedImportName, renamedImportName);
+  updateImports({
+    namedImportName,
+    renamedImportName,
+    moduleSpecifier,
+    sourceFiles: replacedInOnceHooks,
     shouldRenameToHook: true,
     isTransaction,
   });
@@ -91,6 +116,21 @@ function run(
     isTransaction,
   });
 
+  console.log(
+    "⛳️ Checkpoint: replace occurrences where is connector..."
+  );
+  const connectorUpdates = updateConnectors({
+    namedImportName,
+  });
+  updateImports({
+    namedImportName,
+    renamedImportName,
+    moduleSpecifier,
+    sourceFiles: connectorUpdates,
+    isTransaction,
+    shouldRenameToHook: true,
+  });
+
   if (isTransaction) {
     saveProject();
   }
@@ -99,6 +139,8 @@ function run(
   const allFiles = [
     ...getStateReplacedInFiles,
     ...reduxReplacedInFiles,
+    ...replacedInOnceHooks,
+    ...connectorUpdates,
     ...yieldSelectReplacedInFiles,
     ...functionArgumentReplacedInFiles,
   ]
@@ -110,30 +152,33 @@ function run(
     cwd: "/Users/boris.mutafov/monorepo",
   });
 
-  console.log("⛳️ Checkpoint: Check TS");
-  console.log("This takes a while...");
+  // console.log("⛳️ Checkpoint: Check TS");
+  // console.log("This takes a while...");
 
-  const tsBuildSuccess = checkTs(true);
+  // const tsBuildSuccess = checkTs(true);
 
-  if (!tsBuildSuccess) {
-    console.log("🚨 TS Build failed. Please continue with manual review...");
-    process.exit(1);
-  }
+  // if (!tsBuildSuccess) {
+  //   console.log("🚨 TS Build failed. Please continue with manual review...");
+  //   console.log("\n 💡 When done use commit message:");
+  //   console.log(
+  //     pc.yellow(getCommitMessage(namedImportName, renamedImportName))
+  //   );
+  //   process.exit(1);
+  // }
 
-  console.log("⛳️ Checkpoint: Committing changes...");
+  // console.log("⛳️ Checkpoint: Committing changes...");
 
-  describeChanges();
+  // describeChanges();
 
-  createCommit(namedImportName, renamedImportName);
+  // createCommit(namedImportName, renamedImportName);
 
   console.log("🏁 Finished");
 }
 
-
 // TO RUN: Uncomment this and change as desired
-// run(
-//   "getCustomerCountryOfResidence",
-//   "getCustomerCountryOfResidence",
-//   "@trading212/onboarding.public.ts.util.customer",
-//   false
-// );
+run({
+  namedImportName: "getCustomerDealer",
+  renamedImportName: "getCustomerDealer",
+  moduleSpecifier: "@trading212/onboarding.public.ts.util.customer",
+  isTransaction: false,
+});
